@@ -78,12 +78,12 @@ function pokeAleatorio1() {
 
 async function dameMiPokemon(poke) {
   try {
-    console.log(poke);
+    //console.log(poke);
     const promesa = await fetch(`https://pokeapi.co/api/v2/pokemon/${poke}`);
     const pokemon = await promesa.json();
     const sprite = pokemon.sprites.front_default;
-    console.log("Los datos de mi pokemon:", pokemon);
-    console.log("Ruta del sprite:", sprite);
+    //console.log("Los datos de mi pokemon:", pokemon);
+    //console.log("Ruta del sprite:", sprite);
 
     const imagen = document.getElementById("imagenPoke");
     imagen.src = sprite;
@@ -99,7 +99,7 @@ async function dameMiPokemon(poke) {
 
     document.getElementById("imagenPoke").style.filter = "brightness(0.1)";
   } catch (err) {
-    console.log("Ops:", err);
+    //console.log("Ops:", err);
   }
 }
 pokeAleatorio1();
@@ -128,12 +128,12 @@ botonQuitarSombra.onclick = (e) => {
 //arengla el bug que se si no acierta la opc correcta se ordene de nuevo las opciones
 function isCorrect(nomePokemon, ordenar = false) {
   if (nomePokemon === sessionStorage.getItem("pokemonAdivinar")) {
-    console.log("ok");
+    //console.log("ok");
     elimiarPokeByWin();
     aumentarVida();
     /// ....falta aumentar Vida
   } else {
-    console.log("No ok");
+    //console.log("No ok");
     quitarSombra();
     document.getElementById("imagenPoke").style.filter = "brightness(1)";
     if (ordenar) {
@@ -171,10 +171,10 @@ function ponerOpciones(namePoke) {
     //creo bucle para llenar array vacío
     x = desordenar(numeros);
     numerosDesordenados[i] = x;
-    console.log(i, x);
+    //console.log(i, x);
   }
 
-  console.log(numerosDesordenados);
+  //console.log(numerosDesordenados);
   op1.innerText = numerosDesordenados[2][0];
   op2.innerText = numerosDesordenados[2][1];
   op3.innerText = numerosDesordenados[2][2];
@@ -204,19 +204,19 @@ const op3 = document.getElementById("op3");
 
 op1.onclick = (e) => {
   e.preventDefault();
-  console.log("Me hiciste clic", op1.textContent);
+  //console.log("Me hiciste clic", op1.textContent);
   isCorrect(op1.textContent);
 };
 
 op2.onclick = (e) => {
   e.preventDefault();
-  console.log("Me hiciste clic", op2.textContent);
+  //console.log("Me hiciste clic", op2.textContent);
   isCorrect(op2.textContent);
 };
 
 op3.onclick = (e) => {
   e.preventDefault();
-  console.log("Me hiciste clic", op3.textContent);
+  //console.log("Me hiciste clic", op3.textContent);
   isCorrect(op3.textContent);
 };
 // ---------------------------------------------------------------------------------------------------------------------------
@@ -259,7 +259,7 @@ const vidas = document.getElementById("vidas");
 const intentosOK = document.getElementById("intentosOK");
 
 op1Evento.addEventListener("click", function () {
-  console.log(vidas.textContent);
+  //console.log(vidas.textContent);
   // buscar los numeros en la cadeena de string y restarle 1
   disminuirVida(false, op1Evento.textContent);
 
@@ -270,7 +270,7 @@ op1Evento.addEventListener("click", function () {
 const op2Evento = document.getElementById("op2");
 
 op2Evento.addEventListener("click", function () {
-  console.log(vidas.textContent);
+  //console.log(vidas.textContent);
   // buscar los numeros en la cadeena de string y restarle 1
   disminuirVida(false, op2Evento.textContent);
   mostrarContadorEnOpcion(op2Evento);
@@ -280,7 +280,7 @@ op2Evento.addEventListener("click", function () {
 const op3Evento = document.getElementById("op3");
 
 op3Evento.addEventListener("click", function () {
-  console.log(vidas.textContent);
+  //console.log(vidas.textContent);
   // buscar los numeros en la cadeena de string y restarle 1
   disminuirVida(false, op3Evento.textContent);
   mostrarContadorEnOpcion(op3Evento);
@@ -354,10 +354,10 @@ botonSkipEvento.onclick = (e) => {
 function clickPasaPasar(condition) {
   if (condition) {
     const intentosSkip1 = document.getElementById("intentosSkip");
-    console.log(intentosSkip1.textContent);
+    //console.log(intentosSkip1.textContent);
     // buscar los numeros en la cadeena de string y restarle 1
     let stringWithNumbers = intentosSkip1.textContent.replace(/[^0-9]+/g, "");
-    console.log(intentosSkip1.stringWithNumbers);
+    //console.log(intentosSkip1.stringWithNumbers);
     ++stringWithNumbers;
     let mesnsaje = "skipeadas(" + stringWithNumbers + ")";
     intentosSkip1.innerText = mesnsaje;
