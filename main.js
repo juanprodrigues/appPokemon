@@ -113,7 +113,7 @@ const botonQuitarSombra = document.getElementById("boton-quitar-sombra");
 
 botonAdivinar.onclick = (e) => {
   e.preventDefault();
-  isCorrect(pokemonIngresado.value, true);
+  isCorrect(pokemonIngresado.value, true,true);
 };
 
 // Quita sombra de pokemon
@@ -126,11 +126,12 @@ botonQuitarSombra.onclick = (e) => {
 // ----------------------------------------------------------------------------------------------------------------------------
 // Logica para verificar si el nombre es el correcto, se envia un booleano para restrungir el aceso
 //arengla el bug que se si no acierta la opc correcta se ordene de nuevo las opciones
-function isCorrect(nomePokemon, ordenar = false) {
+function isCorrect(nomePokemon, ordenar = false,aumentar=falso) {
   if (nomePokemon === sessionStorage.getItem("pokemonAdivinar")) {
     //console.log("ok");
     elimiarPokeByWin();
-    aumentarVida();
+    aumentarVida(aumentar);
+
     /// ....falta aumentar Vida
   } else {
     //console.log("No ok");
@@ -318,13 +319,16 @@ function disminuirVida(normal, valorBoton) {
   }
 }
 
-function aumentarVida() {
-  let stringWithNumbers = vidas.textContent.replace(/[^0-9]+/g, "");
-  ++stringWithNumbers;
-  let mesnsaje = "Vidas(" + stringWithNumbers + ")";
-  vidas.innerText = mesnsaje;
-  mostrarContadorEnOpcion(botonAdivinar);
-  desabilitarBotenes(op1Evento, op2Evento, "null", botonSkipEvento);
+function aumentarVida(aumentar=true) {
+  if (aumentar) {
+    let stringWithNumbers = vidas.textContent.replace(/[^0-9]+/g, "");
+    ++stringWithNumbers;
+    let mesnsaje = "Vidas(" + stringWithNumbers + ")";
+    vidas.innerText = mesnsaje;
+    mostrarContadorEnOpcion(botonAdivinar);
+    desabilitarBotenes(op1Evento, op2Evento, "null", botonSkipEvento);
+  }
+
 }
 
 function mostrarContadorEnOpcion(opcionX) {
