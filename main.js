@@ -1,6 +1,5 @@
 const siguintePOke = (_) => {
   //recargo-el pokemon a lelegir
-
   //recuperar escenario-1
   const escenario_1 = document.getElementById("escenario-1");
   escenario_1.hidden = false;
@@ -233,7 +232,7 @@ function elimiarPokeByWin() {
   const pokeMio = document.getElementById("imagenPoke");
   pokeMio.remove();
 
-  const afsaf = "ok"+getRandomInt(3)+".gif";
+  const afsaf = "gif/ok"+getRandomInt(3)+".gif";
 
   const imagen = document.createElement("img");
   imagen.src = afsaf;
@@ -248,7 +247,7 @@ function elimiarPokeByLose() {
   pokeMio.remove();
 
 
-  const afsaf = "error"+getRandomInt(3)+".gif";
+  const afsaf = "gif/error"+getRandomInt(3)+".gif";
 
   const imagen = document.createElement("img");
   imagen.src = afsaf;
@@ -259,7 +258,7 @@ function elimiarPokeByLose() {
 }
 
 // eventos para disminuior el numero de vidas
-// como voya  saber cual es el poke correcto???
+// como voy a  saber cual es el poke correcto???
 
 const op1Evento = document.getElementById("op1");
 const vidas = document.getElementById("vidas");
