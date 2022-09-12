@@ -126,7 +126,7 @@ botonQuitarSombra.onclick = (e) => {
 // ----------------------------------------------------------------------------------------------------------------------------
 // Logica para verificar si el nombre es el correcto, se envia un booleano para restrungir el aceso
 //arengla el bug que se si no acierta la opc correcta se ordene de nuevo las opciones
-function isCorrect(nomePokemon, ordenar = false,aumentar=falso) {
+function isCorrect(nomePokemon, ordenar = false,aumentar=false) {
   if (nomePokemon === sessionStorage.getItem("pokemonAdivinar")) {
     //console.log("ok");
     elimiarPokeByWin();
