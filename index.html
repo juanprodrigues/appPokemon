@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Ahorcado</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <!-- <script type="text/javascript" src="js/ahorcado.js"></script> -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body id="body">
+
+    <div id="principal" class="container bg-white">
+      <!-- TITULO -->
+      <div class="row justify-content-center titulo-principal text-white text-center">
+        <h1 class="h1"> ¿QUIÉN ES ESE POKÉMON?</h1>
+      </div>
+      <br>
+      <!-- Contenedor para el flex-box -->
+      <div class="flex-container">
+
+        <div id="pokemones">
+          <img  width="300" height="300" id="imagenPoke" style="margin: 9%;">
+  
+        </div>
+  
+        <div id="escenario-1" class="row g-3 align-items-center">
+          <!-- Star Primer escenario -->
+          <div class="row g-3 align-items-center">
+            <div class="col-center">
+              <!-- nombre correcto de pokemon -->
+              <label id="test"></label>
+              <input type="text" id="pokemonIngresado" class="form-control " aria-describedby="passwordHelpInline">
+            </div>
+          </div>
+        
+          <!-- <button type="button" class="btn btn-primary">Intruducir Nombre</button> -->
+          <button id="boton-adivinar" type="button" class="btn btn color-fondo-1">Adivinar Pokemon</button>
+          <button id="boton-quitar-sombra" type="button" class="btn btn-info">Quitar la sombra y mostrar opciones</button>
+          <!-- END Primer escenario -->
+        </div>
+
+
+          <div id="escenario-2" hidden  class="row g-3 align-items-center">
+            <button  id="op1" type="button" class="btn btn color-fondo-2 ">Opcion 1</button>
+            <button  id="op2" type="button" class="btn btn-warning">Opcion 2</button>
+            <button  id="op3" type="button" class="btn btn-info">Opcion 3</button>
+          </div>
+    
+    
+          <div id="escenario-3" class="row g-3 align-items-center" >
+            <button id="aumentarPokemon"  type="button" class="btn btn-danger">N° pokemones(1000)</button>
+            <button id="vidas" type="button" class="btn btn-success">Vidas(5)</button>
+            <button id="intentosOK" type="button" class="btn btn-primary">Correctas(0)</button>
+
+            <!-- <button id="intentosError" type="button" class="btn btn-warning">Equivocadas</button> -->
+
+            <button id="intentosSkip"  type="button" class="btn btn-secondary">skipeadas(0)</button>
+          </div>
+
+          <div>
+            <button id="refresh" type="button" class="btn btn-light">Probar con otro POKE</button>
+
+            <!-- <label id=""> si adivina el nombre de una , suma una vida, si no solo quita la sombra</label> -->
+            <h5 > Reglas</h5>
+            <h6 >si adivina el nombre de una , suma una vida, si no,muestra las opciones pero sin la sombra</h6>
+          </div>
+
+    
+  
+
+
+
+
+
+      </div>
+
+
+      
+
+    <script src="main.js"></script>
+  </body>
+</html>
