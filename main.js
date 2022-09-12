@@ -6,7 +6,7 @@ const siguintePOke = (_) => {
   //ocular escenario-2
   const escenario_2 = document.getElementById("escenario-2");
   escenario_2.hidden = true;
-  desabilitarBotenes(op1Evento, op2Evento, op3Evento,botonSkipEvento,false);
+  desabilitarBotenes(op1Evento, op2Evento, op3Evento, botonSkipEvento, false);
   pokeAleatorio1();
 };
 // ---------------------------------------------------------------------------------------------------------------------------
@@ -44,30 +44,24 @@ function pokeAleatorio1() {
   )
     .then((res) => res.json())
     .then((data) => {
-      // Analizar cuando sea mayor a 100
-
-      //return data.result
-
-      //console.log(data.results)
       objeto = JSON.stringify(data.results);
-
       objeto = JSON.parse(objeto);
-      //console.log(objeto)
       let arrayMostrar = [];
-      let pokeramdomName = getRandomInt(objeto.length);
+      let tamArray=objeto.length;
+      let pokeramdomName = getRandomInt(tamArray);
       arrayMostrar.push(pokeramdomName);
       let pokeramdomName2 = validar(
-        getRandomInt(objeto.length),
+        getRandomInt(tamArray),
         arrayMostrar,
-        objeto.length
+        tamArray
       );
 
       arrayMostrar.push(pokeramdomName2);
 
       let pokeramdomName3 = validar(
-        getRandomInt(objeto.length),
+        getRandomInt(tamArray),
         arrayMostrar,
-        objeto.length
+        tamArray
       );
       arrayMostrar.push(pokeramdomName3);
 
@@ -78,7 +72,7 @@ function pokeAleatorio1() {
       sessionStorage.setItem("pokemonAdivinar2", namePOke2);
       sessionStorage.setItem("pokemonAdivinar3", namePOke3);
       dameMiPokemon(namePOke);
-      //console.log(objeto = JSON.stringify(data.results[1].name))
+      
     });
 }
 
@@ -99,12 +93,13 @@ async function dameMiPokemon(poke) {
     imagen.alt = `${poke}`;
 
     document.getElementById("imagenPoke").style.margin = "9%";
-    const imagenasd = (document.getElementById("test").innerText = `${poke}`);
+    document.getElementById("test").innerText = `${poke}`;
+
     sessionStorage.setItem("pokemonAdivinar", `${poke}`);
 
     document.getElementById("imagenPoke").style.filter = "brightness(0.1)";
   } catch (err) {
-    console.log("Che, hubo un error:", err);
+    console.log("Ops:", err);
   }
 }
 pokeAleatorio1();
@@ -113,12 +108,12 @@ pokeAleatorio1();
 // verificar que el pokemon es el escrito
 const botonAdivinar = document.getElementById("boton-adivinar");
 
-const nombre = document.querySelector("#pokemonIngresado");
+const pokemonIngresado = document.querySelector("#pokemonIngresado");
 const botonQuitarSombra = document.getElementById("boton-quitar-sombra");
 
 botonAdivinar.onclick = (e) => {
   e.preventDefault();
-  isCorrect(nombre.value, true);
+  isCorrect(pokemonIngresado.value, true);
 };
 
 // Quita sombra de pokemon
@@ -130,12 +125,12 @@ botonQuitarSombra.onclick = (e) => {
 };
 // ----------------------------------------------------------------------------------------------------------------------------
 // Logica para verificar si el nombre es el correcto, se envia un booleano para restrungir el aceso
-//arengla el bug que se si no acierta la opc correcta se aordene ne nuevo las opciones
+//arengla el bug que se si no acierta la opc correcta se ordene de nuevo las opciones
 function isCorrect(nomePokemon, ordenar = false) {
   if (nomePokemon === sessionStorage.getItem("pokemonAdivinar")) {
     console.log("ok");
     elimiarPokeByWin();
-    aumentarVida()
+    aumentarVida();
     /// ....falta aumentar Vida
   } else {
     console.log("No ok");
@@ -232,10 +227,10 @@ function elimiarPokeByWin() {
   const pokeMio = document.getElementById("imagenPoke");
   pokeMio.remove();
 
-  const afsaf = "gif/ok"+getRandomInt(3)+".gif";
+  const pathGif = "gif/ok" + getRandomInt(3) + ".gif";
 
   const imagen = document.createElement("img");
-  imagen.src = afsaf;
+  imagen.src = pathGif;
   imagen.width = 300;
   imagen.height = 300;
   imagen.id = "imagenPoke";
@@ -246,11 +241,10 @@ function elimiarPokeByLose() {
   const pokeMio = document.getElementById("imagenPoke");
   pokeMio.remove();
 
-
-  const afsaf = "gif/error"+getRandomInt(3)+".gif";
+  const pathGif = "gif/error" + getRandomInt(3) + ".gif";
 
   const imagen = document.createElement("img");
-  imagen.src = afsaf;
+  imagen.src = pathGif;
   imagen.width = 300;
   imagen.height = 300;
   imagen.id = "imagenPoke";
@@ -270,7 +264,7 @@ op1Evento.addEventListener("click", function () {
   disminuirVida(false, op1Evento.textContent);
 
   mostrarContadorEnOpcion(op1Evento);
-  desabilitarBotenes(op3Evento, op2Evento,"null",botonSkipEvento);
+  desabilitarBotenes(op3Evento, op2Evento, "null", botonSkipEvento);
 });
 
 const op2Evento = document.getElementById("op2");
@@ -280,7 +274,7 @@ op2Evento.addEventListener("click", function () {
   // buscar los numeros en la cadeena de string y restarle 1
   disminuirVida(false, op2Evento.textContent);
   mostrarContadorEnOpcion(op2Evento);
-  desabilitarBotenes(op1Evento, op3Evento,"null",botonSkipEvento);
+  desabilitarBotenes(op1Evento, op3Evento, "null", botonSkipEvento);
 });
 
 const op3Evento = document.getElementById("op3");
@@ -291,43 +285,31 @@ op3Evento.addEventListener("click", function () {
   disminuirVida(false, op3Evento.textContent);
   mostrarContadorEnOpcion(op3Evento);
 
-  desabilitarBotenes(op1Evento, op2Evento,"null",botonSkipEvento);
+  desabilitarBotenes(op1Evento, op2Evento, "null", botonSkipEvento);
 });
 
-function desabilitarBotenes(params, params1, params3,params4, estado = true) {
+function desabilitarBotenes(params, params1, params3, params4, estado = true) {
   params.disabled = estado;
   params1.disabled = estado;
   params3.disabled = estado;
   params4.disabled = estado;
-  document.getElementById("pokemonIngresado").value=""
-  botonAdivinar.innerText="Adivinar Pokemon"
+  document.getElementById("pokemonIngresado").value = "";
+  botonAdivinar.innerText = "Adivinar Pokemon";
 }
 
 //solo va a ser verdaddero si adivina con el nombre al inicio...
 function disminuirVida(normal, valorBoton) {
   let okpoke =
     sessionStorage.getItem("pokemonAdivinar") == valorBoton ? true : false;
-
-  // if(normal && okpoke==true){
-  //     let stringWithNumbers = vidas.textContent.replace(/[^0-9]+/g, "") + 1;
-  //     let mesnsaje = "Vidas(" + stringWithNumbers + ")";
-  //     vidas.innerText = mesnsaje;
-  // }else{
-
-  //     let stringWithNumbers = vidas.textContent.replace(/[^0-9]+/g, "") - 1;
-  //     let mesnsaje = "Vidas(" + stringWithNumbers + ")";
-  //     vidas.innerText = mesnsaje;
-  // }
   if (!okpoke) {
     let stringWithNumbers = vidas.textContent.replace(/[^0-9]+/g, "") - 1;
     let mesnsaje = "Vidas(" + stringWithNumbers + ")";
-    if (!stringWithNumbers==0) {
-        vidas.innerText = mesnsaje;
-    }else{
-        alert("Perdiste todas tus vidas, se reiniciar el juego")
-        window.location.reload()
+    if (!stringWithNumbers == 0) {
+      vidas.innerText = mesnsaje;
+    } else {
+      alert("Perdiste todas tus vidas, se reiniciar el juego");
+      window.location.reload();
     }
-
   } else {
     let stringWithNumbers = intentosOK.textContent.replace(/[^0-9]+/g, "");
     ++stringWithNumbers;
@@ -337,19 +319,18 @@ function disminuirVida(normal, valorBoton) {
 }
 
 function aumentarVida() {
-
-        let stringWithNumbers = vidas.textContent.replace(/[^0-9]+/g, "");
-        ++stringWithNumbers
-        let mesnsaje = "Vidas(" + stringWithNumbers + ")";
-        vidas.innerText = mesnsaje;
-        mostrarContadorEnOpcion(botonAdivinar)
-        desabilitarBotenes(op1Evento, op2Evento,"null",botonSkipEvento);
+  let stringWithNumbers = vidas.textContent.replace(/[^0-9]+/g, "");
+  ++stringWithNumbers;
+  let mesnsaje = "Vidas(" + stringWithNumbers + ")";
+  vidas.innerText = mesnsaje;
+  mostrarContadorEnOpcion(botonAdivinar);
+  desabilitarBotenes(op1Evento, op2Evento, "null", botonSkipEvento);
 }
 
 function mostrarContadorEnOpcion(opcionX) {
-  for (var index = 1; index < 6; index++) {
+  for (var index = 1; index < 4; index++) {
     //f(x)=6-x para invertir el tiempo
-    let tiempo = 6 - index;
+    let tiempo = 4 - index;
     setTimeout(function () {
       let mensaje = "Siguiente en " + tiempo + " seg";
       opcionX.innerText = mensaje;
@@ -358,7 +339,7 @@ function mostrarContadorEnOpcion(opcionX) {
 
   setTimeout(function () {
     siguintePOke();
-  }, 6000);
+  }, 4000);
 }
 // ---------------------------------------------------------------------------------------------------------------------------
 // eventos para aumentar el numero de vidas
@@ -388,6 +369,4 @@ const aumentarNumeroPokemon = document.getElementById("aumentarPokemon");
 const setTextNumero = "N° pokemones(" + sessionStorage.getItem("numPoke") + ")";
 aumentarNumeroPokemon.textContent = setTextNumero;
 
-
 // validar que cuando llega a cero, se acabe el juego
-
