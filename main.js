@@ -312,12 +312,18 @@ function disminuirVida(normal, valorBoton) {
       window.location.reload();
     }
   } else {
-    let stringWithNumbers = intentosOK.textContent.replace(/[^0-9]+/g, "");
-    ++stringWithNumbers;
-    let mesnsaje = "Correctas(" + stringWithNumbers + ")";
-    intentosOK.innerText = mesnsaje;
+    aumentarCorrectas();
   }
 }
+
+function aumentarCorrectas() {
+  let stringWithNumbers = intentosOK.textContent.replace(/[^0-9]+/g, "");
+  ++stringWithNumbers;
+  let mesnsaje = "Correctas(" + stringWithNumbers + ")";
+  intentosOK.innerText = mesnsaje;
+}
+
+
 
 function aumentarVida(aumentar=true) {
   if (aumentar) {
@@ -327,6 +333,7 @@ function aumentarVida(aumentar=true) {
     vidas.innerText = mesnsaje;
     mostrarContadorEnOpcion(botonAdivinar);
     desabilitarBotenes(op1Evento, op2Evento, "null", botonSkipEvento);
+    aumentarCorrectas();
   }
 
 }
